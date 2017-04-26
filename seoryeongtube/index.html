@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<title>서령튜브</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#19B5FE">
+    
+<link rel="stylesheet" type="text/css" href="/$skin/css/style.css?action=SkinFile" />
+
+<script type="text/javascript" src="/$skin/js/jquery-1.11.2.min.js?action=SkinFile"></script>
+<script type="text/javascript">
+var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
+</script>
+<script type="text/javascript" src="/$skin/js/common.js?action=SkinFile"></script>
+<script type="text/javascript" src="/$skin/js/sortabletable.js?action=SkinFile"></script>
+    
+<link rel="shortcut icon" href="/$skin/favicon.ico" >
+    
+</head>
+
+<body>
+<div id="wrap">
+	<div id="header">
+		<div id="inner-wrap" class="width">
+			<div id="logo">
+				<h1><a href="/">서령튜브</a></h1>
+			</div>
+			<div id="nav">
+				<ul>
+					#if( $current_login_id )
+					<li class="first"><a href=".?action=Logout" title="$current_login_id">로그아웃</a></li>
+					#else
+					<li class="first"><a href=".?action=Login">로그인</a></li>
+					#end <!-- current_login_id close -->
+					#if( $upload_path )
+					<li onClick="onMkdir()"><a href="#mkdir">새 폴더</a></li>
+					<li onClick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=400,height=200,toolbar=no,status=no,resizable=no');"><a href="#upload">Upload</a></li>
+					<li onclick="OnPlugin('Delete');"><a href="#">삭제</a></li>
+					<li onclick="OnPlugin('Rename');"><a href="#">이름 바꾸기</a></li>
+					#end <!-- upload_path close -->
+				</ul>
+			</div>
+			<div id="nav_back"></div>
+			<div id="nav_button"><img src="/$skin/images/btn_nav.png?action=SkinFile" alt="nav" /></div>
+            
+			#if( $display_upper )
+				    <div id="nav_prev" onclick="location.href='..'"><img src="/$skin/images/btn_prev.png?action=SkinFile"  alt="nav" /></div>
+                    <!-- <div id="nav_prev" onclick="location.href='..'"><img class="sprite sprite-btn_prev"></img></div> -->
+			#else
+			#end	
+			<div class="clear"></div>
+		</div>
+	</div>
+
+	<div id="article">
+		<div id="inner-wrap" class="width">
+			#if( $content )
+			<div class="error">
+			$content<br/>
+			이 상태가 계속되면 관리자에게 문의하세요.
+				#if( $content_hide_back_button )
+				#else
+				<br/><br/>
+				<a href='/'>[처음으로]</a>
+				#end
+			</div>
+			#end
+
+			#if( $show_files )
+			<div id="pluginWrap">
+				<ul id="button">
+					<li>부가기능</li>
+				</ul>
+				<ul id="plugin">
+					<li onclick="OnPlugin('playlist.asx');"><a href="#">ASX Streaming</a></li>
+					<li onclick="OnPlugin('ZIPdownload');"><a href="#">ZIP Download</a></li>
+					<li onclick="OnPlugin('RARdownload');"><a href="#">RAR Download</a></li>
+					<li onclick="OnPlugin('album');" class="last"><a href="#">만화뷰어로 보기</a></li>
+				</ul>
+			</div>
+
+			<form id="pluginForm" method="POST" action=""><input type="HIDDEN" name="selectedFiles" value=""></form>
+			<form id="fileListForm" style="margin:0px; padding:0px;">
+			<input type="hidden" name="checkboxes" style="margin:0px;"/>
+			<table id="fileListTable" cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						<th class="checkbox"><input type="CHECKBOX" name="selectAllCheckbox" onClick="ToggleSelectAll();" /></th>
+						<th class="name">파일명</th>
+						<th class="size">파일 크기/수정 날짜</th>
+						<!-- <th class="date">수정 날짜</th> -->
+                        <th class="direct"></th>
+						<th class="address">링크</th>
+					</tr>
+				</thead>
+				<tbody>
+				#foreach( $files )
+					#if ( $is_folder )
+					<tr class="folder">
+						<td class="checkbox"><input type='checkbox' name="checkbox#$link" value="$link" onClick='HighlightRow("$link", this.checked)'/></td>
+						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
+						<!-- <td class="size font-size11" id="cvtsize[]"></td> -->
+						<td class="date font-size11" id="cvtsize[]">$date</td>
+                        <td class="direct"></td>
+						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></a></td>
+					</tr>
+					#else
+					<tr>
+						<td class="checkbox"><input type='checkbox' name="checkbox#$link" value="$link" onClick='HighlightRow("$link", this.checked)'/></td>
+						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
+						<!-- <td class="size font-size11" id="cvtsize[]">$size</td> -->
+						<td class="date font-size11" id="cvtsize[]">$size <br> $date</td>
+                        <td class="direct"></td>
+						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></a></td>
+					</tr>
+					#end <!-- is_folder close -->
+				#end <!-- foreach($files) close -->
+					#if( $files )
+					#else
+					<tr>
+						<td colspan="5" style="text-align: center; height: 150px;">폴더가 비었습니다.</td>
+					</tr>
+					#end <!-- files close -->
+				</tbody>
+			</table>
+			</form>
+			#end <!-- show_files close -->
+
+			#if( $address )
+			<div id="location">
+				<script type="text/javascript">
+					write_split_address("$address");
+				</script>
+			</div>
+			#end <!-- address close -->
+        </div>
+        <div id="web"><script type="text/javascript" src="http://tab2.clickmon.co.kr/pop/wp_ad_160_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1014884%7C%5E%7CAdver_M_1003115" ></script></div>
+        </div>
+    
+	<div id="footer">
+        <div id="adsense">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- SeoryeongTube -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-6534118810230376"
+                data-ad-slot="7322586377"
+                data-ad-format="auto"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+          <div id="disqus_thread">
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES * * */
+            var disqus_shortname = 'seoryeongtube';
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by SeoryeongTube.</a></noscript>
+           </div>
+        
+        <div id="inner-wrap" class="width">
+			<span><b>SeoryeongTube Since 2015</b></span>
+			<span>Designed by <a href="http://wallel.com" target="_blank"><b>wallel</b></a> (v2.2)</span>
+			<!-- Designed by wallel 이랑 버전 표기는 절대 지우지 마세요. -->
+		</div>
+        
+
+#if( $upload_path )
+<div style="visibility:hidden">
+<form method="GET" action="." name="MkdirForm">
+	<input type="hidden" name="action" value="MakeDirectory">
+	<input type="hidden" name="name">
+</form>
+</div>
+#end
+
+<script type="text/javascript">
+var st1 = new SortableTable(document.getElementById("fileListTable"),
+	["None", "CaseInsensitiveString", "Number", "InvertTime","None"]);
+</script>
+
+<script type="text/javascript">
+//용량 단위 변환 JS - http://blog.naver.com/ddworld/30137189886
+function byteConvertor(bytes) {
+	bytes = parseInt(bytes.replace(/,/gi, ''));
+	if (bytes > 0) {
+		var s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+		var e = Math.floor(Math.log(bytes)/Math.log(1024));
+
+		if(e >= s.length) e = s.length - 1;//s의 마지막 단위로 표시할 수 없이 크다면, 마지막 단위로 처리
+
+		else if(e == "-Infinity") return "0 " + s[0];
+		else return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+	}
+	else {
+		return "";
+	}
+}
+function onloadConvertor() {
+	var conobj = document.getElementById("cvtsize[]").firstChild;
+	if (conobj.length >= 1) {
+		for (var i=0; i<conobj.length; i++) {
+			conobj[i].innerHTML = byteConvertor(conobj[i].innerHTML);
+		}
+	}
+	else {
+		return "";
+	}
+}
+onloadConvertor();
+</script> 
+</body>
+</html>
+<!-- version 1.0 -->
+<!-- icon by famfamfam.com -->

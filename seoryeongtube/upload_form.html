@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>파일 업로드</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	font-family: 'Nanum Gothic', serif;
+	line-height: 100%;
+	font-size: 12px;
+}
+
+body {
+	background: #f1f1f1;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+a:hover {
+	color: #888;
+	text-decoration: none;
+}
+
+img {
+	border: none;
+}
+
+div,
+span {
+	box-sizing: border-box;
+}
+
+a,
+table tbody tr {
+-webkit-transition: all .5s ease, margin .5s ease;
+   -moz-transition: all .5s ease, margin .5s ease;
+    -ms-transition: all .5s ease, margin .5s ease;
+     -o-transition: all .5s ease, margin .5s ease;
+        transition: all .5s ease, margin .5s ease;
+}
+
+#wrap {
+	width: 100%;
+	height: 100%;
+}
+form {
+	margin: 0;
+	padding: 0;
+}
+input {
+	font-family: 'Nanum Gothic';
+	font-size: 12px;
+	padding: 3px;
+}
+input.text {
+	width: 70%;
+	float: left;
+}
+input.button {
+	width: 20%;
+	float: right;
+}
+#filedrag
+{
+	display: none;
+	font-weight: bold;
+	text-align: center;
+	padding: 1em 0;
+	margin: 1em 0;
+	color: #555;
+	border: 2px dashed #555;
+	border-radius: 7px;
+	cursor: default;
+}
+
+#filedrag.hover
+{
+	color: #f00;
+	border-color: #f00;
+	border-style: solid;
+	box-shadow: inset 0 3px 4px #888;
+}    
+</style>
+</head>
+
+<body>
+<div id="wrap">
+<form method="post" name="uploadForm" enctype="multipart/form-data">
+	<input type="file" name="uploadfile" class="text"/>
+	<input type="submit" value="업로드" class="button" onClick='return onUpload();' />
+</form>
+</div>
+<div id="drop">
+    <form method="post" name="uploadForm" enctype="multipart/form-data">
+        <input type="file" name="dropfile" class="text"/>
+        <div>
+	       <label for="fileselect">Files to upload:</label>
+	       <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+	       <div id="drag">Drag && Drop</div>
+        </div>
+    </form>        
+</div>
+
+<script language="JavaScript" type="text/javascript">
+// http://kldp.net/snippet/detail.php?type=snippet&id=43
+String.prototype.trim = function()
+{
+	var pattern = !arguments[0] ?
+			/^\s+|\s+$/g :
+			new RegExp('^['+arguments[0]+']+|['+arguments[0]+']+$', 'g');
+
+	return this.replace(pattern, '');
+}
+
+// 초기화
+var uniqueKey = '[' + Math.random() + ']';
+var loc       = "" + document.location;
+var urlPath   = loc.substr(loc.indexOf("#")+1)
+document.uploadForm.action = urlPath + "?action=Upload&key="+uniqueKey;
+
+// 업로드 버튼이 눌렸을 때
+function onUpload()
+{
+	var localPath = document.uploadForm.uploadfile.value;
+	if( localPath.trim() == "" )
+	{
+		alert("업로드할 파일을 선택해 주십시오");
+		return false;
+	}
+	else
+	{
+		var pattern  = new RegExp('.*[\\\\/]', 'g');
+		var filename = localPath.replace(pattern, '');
+
+		parent.onBeginUpload(filename, uniqueKey);
+		return true;
+	}
+}
+</script>
+
+</body>
+</html>

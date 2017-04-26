@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>Berryz WebShare</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="expires" content="mon, 06 jan 1990 00:00:01 GMT" />
+	<link rel="stylesheet" type="text/css" href="/$skin/dev-style.css?action=SkinFile" />
+	<script src="/$skin/common.js?action=SkinFile"></script>
+	<script src="/$skin/sortabletable.js?action=SkinFile"></script>
+</head>
+
+<body bgcolor="#FFFFFF">
+	<form id="pluginForm" method='POST' action=''>
+		<input type="HIDDEN" name="selectedFiles" value="">
+	</form>
+	<div class="header">
+		<a href="/"><img src="/$skin/logo.png?action=SkinFile" border="0" alt="UPnL Berryz WebShare" /></a>
+	</div>
+	<div id = "titleContainer" class="title" border='1'>
+		#if( $title )
+			$title
+		#end
+		#if( $address )
+		#if( $title )
+			<br/>
+		#end
+		#end
+	</div>
+	#if( $address )
+		<script type="text/javascript">
+		<!--
+			write_split_address("$address");
+		-->
+		</script>
+	#end
+	<div class="content">
+	#if( $content )
+		$content
+		#if( $content_hide_back_button )
+		#else
+			<br/>
+			<br/>
+			<a href='.'>
+			#U("[목록으로]")
+			</a>
+		#end
+	#end
+	#if( $show_files )
+		<div style='width:100%'>
+			<div style='margin-left:20px; float:left;'>
+				#if( $display_upper )
+					<a href='..'>
+						<img alt=".." src="/$skin/folder_upper.gif?action=SkinFile" /> #U("상위 폴더로")</a>
+				#else
+					<img alt=".." src="/$skin/folder_upper.gif?action=SkinFile" /> <font style='color:#aaaaaa;'>#U("상위 폴더로")</font>
+				#end
+
+				#if( $upload_path )
+				<a href='#upload' style='margin-left:14px;' onclick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=750,height=200,toolbar=no,status=no,resizable=no');">
+					<img src='/$skin/upload.gif?action=SkinFile' border='0' /> #U("업로드")</a>
+				#else
+					<img alt="Upload" style='margin-left:14px;' src="/$skin/upload.gif?action=SkinFile" /> <font style='color:#aaaaaa;'>#U("업로드")</font>
+				#end
+
+				#if( $upload_path )
+				<a href='#mkdir' style='margin-left:14px;' onclick="onMkdir()">
+					<img src='/$skin/folder_mkdir.gif?action=SkinFile' border='0' /> #U("새 폴더")</a>
+				#else
+					<img alt="Create Folder" style='margin-left:14px;' src="/$skin/folder_mkdir.gif?action=SkinFile" /> <font style='color:#aaaaaa;'>#U("새 폴더")</font>
+				#end
+
+				<img alt="Plugin" style='margin-left:14px;' src='/$skin/plugin.gif?action=SkinFile' border='0' />
+				<select name="tact" onChange="OnPlugin(this)">
+					<option value="" selected>#U("추가 기능...")</option>
+					<option value="" disabled>-----------------------</option>
+					<option value="" disabled>#U("선택된 대상에 적용:")</option>
+					#if( $action_plugins )
+						#foreach( $action_plugins ) <option value="$id">&nbsp; &nbsp;$name</option> #end
+					#else
+						<option value="" disabled>&nbsp; &nbsp;#U("(사용 가능한 플러그인이 없음)")</option>
+					#end
+					<option value="" disabled>#U("다른 방식으로 보기:")</option>
+					#if( $view_plugins )
+						#foreach( $view_plugins ) <option value="$id">&nbsp; &nbsp;$name</option> #end
+					#else
+						<option value="" disabled>&nbsp; &nbsp;#U("(사용 가능한 플러그인이 없음)")</option>
+					#end
+				</select>
+			</div>
+			<div align='right' style='margin-right:20px; float:right;'>
+				#if( $current_login_id )
+				<font style='color:#aaaaaa;'> #U("다음 계정으로 로그인됨: ") $current_login_id </font>
+				<a href='.?action=Logout' style='margin-left:14px;'>
+					<img src='/$skin/login.png?action=SkinFile' border='0' /> 
+						#U("로그아웃")
+					</a>
+				#else
+				<a href='.?action=Login' style='margin-left:14px;'>
+					<img src='/$skin/login.png?action=SkinFile' border='0' /> #U("로그인") </a>
+				#end
+			</div>
+			<div style='clear:both;'>
+			</div>
+		</div>
+		
+		<form id="fileListForm" style='margin:0px; padding:0px;'>
+		<input type='hidden' name="checkboxes" style='margin:0px;'/>
+		<table class="sortable" id='fileListTable' cellspacing='0'>
+		<colgroup>
+			<col span="1" class="checkbox" />
+			<col span="1" class="icon" />
+			<col span="1" class="filename" />
+			<col span="1" class="filedate" />
+			<col span="1" class="filesize" />
+		</colgroup>
+		<thead>
+			<tr>
+				<th class="checkbox non_sortheader"><input type='CHECKBOX' name="selectAllCheckbox" onClick="ToggleSelectAll();" /></th>
+				<th class="icon non_sortheader">&nbsp;</th>
+				<th class="filename sortheader">
+					#U("이름")
+				</th>
+				<th class="filesize sortheader">
+					#U("크기")
+				</th>
+				<th class="filedate sortheader">
+					#U("수정한 날짜")
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			#foreach( $files )
+			<tr class="fileentry" id="tr#$link">
+				<td class="checkbox">
+					<input type='checkbox' name="checkbox#$link" value="$link" onClick='HighlightRow("$link", this.checked)'/>
+				</td>
+				#if ( $is_folder )
+					<td class="icon"><img alt="D" src="/$skin/folder.gif?action=SkinFile" /></td>
+					<td class="filename"><a href="$link">$name</a></td>
+				#else
+					<td class="icon"><img alt="F" src="/$skin/file.gif?action=SkinFile" /></td>
+					<td class="filename"><a href="$link">$name</a></td>
+				#end
+				<td class="filesize" align="right">&nbsp;
+					$size
+				</td>
+				<td class="filedate" align="right">&nbsp;
+					$date
+				</td>
+			</tr>
+			#end
+			
+			#if( $files )
+			#else
+			<tr>
+				<td align="center">
+				</td>
+				<td class="icon">
+				</td>
+				<td class="filename" style='color:gray'>
+					#U("폴더가 비었습니다.")
+				</td>
+				<td class="filesize" align="right">&nbsp;
+				</td>
+				<td class="filedate" align="right">&nbsp;
+				</td>
+			</tr>
+			#end <!--$files-->
+		</tbody>
+		</table>
+		</form>
+		
+		#if( $files )
+			<div class='totalAndFreeSpace'>
+			#U("전체 크기:") 
+			$total_size 
+			#U("바이트")
+			#if( $free_space )
+				/ 
+				#U("디스크 여유 공간:") 
+				$free_space 
+				#U("바이트")
+			#end
+			</div>
+		#end
+	#end <!--$show_files-->
+	</div>
+
+	<script type="text/javascript">
+		var st1 = new SortableTable(
+			document.getElementById("fileListTable"),
+			["None", "None", "CaseInsensitiveString", "Number", "InvertTime"]
+			);
+		function ts_resortTable( v ){}
+	</script>
+
+	#if( $upload_path )
+	<div style="visibility:hidden">
+		<form method="GET" action="." name="MkdirForm">
+			<input type="hidden" name="action" value="MakeDirectory">
+			<input type="hidden" name="name">
+		</form>
+	</div>
+	#end
+	<div class="footer">
+		Powered by 
+		<A href='http://berryz.upnl.org/webshare' class='footer' target='_blank'>Berryz WebShare
+		v$version (rev.$revision)</A>
+		by 
+		<A href='http://upnl.org' class='footer' target='_blank'>UPnL</A>
+		<A href='http://berryz.upnl.org/main.php/WebShare/Info/' class='footer' target='_blank'>[Project Info]</A>
+		<A href='http://berryz.upnl.org/main.php/HelpUs' class='footer' target='_blank'>[Help Us]</A>
+<!--
+	<p id="validator">
+		<a href="http://validator.w3.org/check?uri=referer"><img
+			src="http://www.w3.org/Icons/valid-xhtml10"
+			alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+	</p>-->
+	</div>
+</body>
+</html>
