@@ -16,7 +16,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 <script type="text/javascript" src="/$skin/js/common.js?action=SkinFile"></script>
 <script type="text/javascript" src="/$skin/js/sortabletable.js?action=SkinFile"></script>
     
-<link rel="shortcut icon" href="/$skin/favicon.ico?action=SkinFile">
+<link rel="shortcut icon" href="/$skin/favicon.ico" >
     
 </head>
 
@@ -89,8 +89,10 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 					<tr>
 						<th class="checkbox"><input type="CHECKBOX" name="selectAllCheckbox" onClick="ToggleSelectAll();" /></th>
 						<th class="name">파일명</th>
-						<th class="size">파일 크기</th>
-						<th class="date">수정 날짜</th>
+                        <th class="size">파일 크기</th>
+                        <th class="date">수정 날짜</th>
+						<th class="mobile">파일 크기/수정 날짜</th>
+						<!-- <th class="date">수정 날짜</th> -->
                         <th class="direct"></th>
 						<th class="address">링크</th>
 					</tr>
@@ -103,6 +105,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
 						<td class="size font-size11" id="cvtsize[]"></td>
 						<td class="date font-size11">$date</td>
+						<td class="mobile font-size11">$date</td>
                         <td class="direct"></td>
 						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></a></td>
 					</tr>
@@ -112,6 +115,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
 						<td class="size font-size11" id="cvtsize[]">$size</td>
 						<td class="date font-size11">$date</td>
+						<td class="mobile font-size11">$size <br> $date</td>
                         <td class="direct"></td>
 						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></a></td>
 					</tr>
@@ -206,18 +210,21 @@ function byteConvertor(bytes) {
 		return "";
 	}
 }
-function onloadConvertor() {
-	var conobj = document.all['cvtsize[]'];
-	if (conobj.length >= 1) {
-		for (var i=0; i<conobj.length; i++) {
-			conobj[i].innerHTML = byteConvertor(conobj[i].innerHTML);
+function mobileloadConvertor() {
+    var table = document.getElementById("fileListTable");
+	if (table.rows.length >= 1) {
+		for (var i=1; i<table.rows.length; i++) {
+            table.rows[i].cells[2].innerHTML = byteConvertor(table.rows[i].cells[2].innerHTML);
+            table.rows[i].cells[4].firstChild.nodeValue = byteConvertor(table.rows[i].cells[2].firstChild.nodeValue);
+			
 		}
 	}
 	else {
 		return "";
 	}
 }
-onloadConvertor();
+
+mobileloadConvertor();
 </script> 
 </body>
 </html>
