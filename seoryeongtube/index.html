@@ -16,7 +16,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 <script type="text/javascript" src="/$skin/js/common.js?action=SkinFile"></script>
 <script type="text/javascript" src="/$skin/js/sortabletable.js?action=SkinFile"></script>
     
-<link rel="shortcut icon" href="/$skin/favicon.ico" >
+<link rel="shortcut icon" href="/$skin/favicon.ico?action=SkinFile">
     
 </head>
 
@@ -89,8 +89,8 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 					<tr>
 						<th class="checkbox"><input type="CHECKBOX" name="selectAllCheckbox" onClick="ToggleSelectAll();" /></th>
 						<th class="name">파일명</th>
-						<th class="size">파일 크기/수정 날짜</th>
-						<!-- <th class="date">수정 날짜</th> -->
+						<th class="size">파일 크기</th>
+						<th class="date">수정 날짜</th>
                         <th class="direct"></th>
 						<th class="address">링크</th>
 					</tr>
@@ -101,8 +101,8 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 					<tr class="folder">
 						<td class="checkbox"><input type='checkbox' name="checkbox#$link" value="$link" onClick='HighlightRow("$link", this.checked)'/></td>
 						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
-						<!-- <td class="size font-size11" id="cvtsize[]"></td> -->
-						<td class="date font-size11" id="cvtsize[]">$date</td>
+						<td class="size font-size11" id="cvtsize[]"></td>
+						<td class="date font-size11">$date</td>
                         <td class="direct"></td>
 						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></a></td>
 					</tr>
@@ -110,8 +110,8 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 					<tr>
 						<td class="checkbox"><input type='checkbox' name="checkbox#$link" value="$link" onClick='HighlightRow("$link", this.checked)'/></td>
 						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
-						<!-- <td class="size font-size11" id="cvtsize[]">$size</td> -->
-						<td class="date font-size11" id="cvtsize[]">$size <br> $date</td>
+						<td class="size font-size11" id="cvtsize[]">$size</td>
+						<td class="date font-size11">$date</td>
                         <td class="direct"></td>
 						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></a></td>
 					</tr>
@@ -207,7 +207,7 @@ function byteConvertor(bytes) {
 	}
 }
 function onloadConvertor() {
-	var conobj = document.getElementById("cvtsize[]").firstChild;
+	var conobj = document.all['cvtsize[]'];
 	if (conobj.length >= 1) {
 		for (var i=0; i<conobj.length; i++) {
 			conobj[i].innerHTML = byteConvertor(conobj[i].innerHTML);
