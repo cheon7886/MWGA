@@ -105,7 +105,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
 						<td class="size font-size11" id="cvtsize[]"></td>
 						<td class="date font-size11">$date</td>
-						<td class="mobile font-size11">$date</td>
+                        <td class="mobile font-size11">$date</td>
                         <td class="direct"></td>
 						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></a></td>
 					</tr>
@@ -115,7 +115,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
 						<td class="size font-size11" id="cvtsize[]">$size</td>
 						<td class="date font-size11">$date</td>
-						<td class="mobile font-size11">$size <br> $date</td>
+						<td class="mobile font-size11">$size<br>$date</td>
                         <td class="direct"></td>
 						<td class="address"><a href="$link" onclick="copy_address(this.href); return false;"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></a></td>
 					</tr>
@@ -198,7 +198,7 @@ var st1 = new SortableTable(document.getElementById("fileListTable"),
 function byteConvertor(bytes) {
 	bytes = parseInt(bytes.replace(/,/gi, ''));
 	if (bytes > 0) {
-		var s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+		var s = ['바이트', 'KB', 'MB', 'GB', 'TB', 'PB'];
 		var e = Math.floor(Math.log(bytes)/Math.log(1024));
 
 		if(e >= s.length) e = s.length - 1;//s의 마지막 단위로 표시할 수 없이 크다면, 마지막 단위로 처리
@@ -210,12 +210,29 @@ function byteConvertor(bytes) {
 		return "";
 	}
 }
+function byteConvertor2(bytes2) {
+	bytes2 = parseInt(bytes2.replace(/,/gi, ''));
+	if (bytes2 > 0) {
+		var s = ['바이트', 'KB', 'MB', 'GB', 'TB', 'PB'];
+		var e = Math.floor(Math.log(bytes2)/Math.log(1024));
+
+		if(e >= s.length) e = s.length - 1;//s의 마지막 단위로 표시할 수 없이 크다면, 마지막 단위로 처리
+
+		else if(e == "-Infinity") return "0 " + s[0];
+		else return (bytes2/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+	}
+	else {
+		return "";
+	}
+}
 function mobileloadConvertor() {
     var table = document.getElementById("fileListTable");
+    
 	if (table.rows.length >= 1) {
 		for (var i=1; i<table.rows.length; i++) {
-            table.rows[i].cells[2].innerHTML = byteConvertor(table.rows[i].cells[2].innerHTML);
-            table.rows[i].cells[4].firstChild.nodeValue = byteConvertor(table.rows[i].cells[2].firstChild.nodeValue);
+            var modsize = byteConvertor(table.rows[i].cells[2].innerHTML);
+            table.rows[i].cells[2].innerHTML = modsize;
+            table.rows[i].cells[4].firstChild.nodeValue = modsize;
 			
 		}
 	}
@@ -226,7 +243,13 @@ function mobileloadConvertor() {
 
 mobileloadConvertor();
 </script> 
+        
+<div id="creidts">    
+<div id="credits">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>    
+<div id="credits">Icons made by <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+</div>
+        
 </body>
 </html>
 <!-- version 1.0 -->
-<!-- icon by famfamfam.com -->
+    
