@@ -280,6 +280,7 @@ function write_split_address( addr )
 	document.getElementById('location').innerHTML += output;
 }
 
+/*
 //file address copy
 function copy_address(url) {
 	var answer = confirm("파일 또는 폴더 주소를 복사하여 다른 사람과 공유하거나,\n동영상 스트리밍을 통해 파일을 다운받지 않고 실시간 감상이 가능합니다.\n\n주소를 확인 하시겠습니까?")
@@ -293,15 +294,18 @@ function copy_address(url) {
 		}
 	}
 }
+*/
 
 $(document).ready(function(){
 	if (folder_date == "0") {
 		$("#fileListTable .folder .date").contents().remove();
 	};
+    /*
 	$( "#nav_button" ).click(function() {
 		$("#nav, #nav_back").toggle();
 		$( "html" ).addClass("open");
 	});
+    
 	$("#nav_back").click(function() {
 		$("#nav, #nav_back").toggle();
 		$("html").removeClass("open")
@@ -309,4 +313,13 @@ $(document).ready(function(){
 	$( "#pluginWrap #button" ).click(function() {
 		$("#pluginWrap #plugin").toggle();
 	});
+    */
+    $("#nav_button").on('click', function() {
+    slideout.toggle();
+    });
+    if (slideout.isOpen() == true){
+        $("#wrap").click(function(){
+           slideout.close();
+        });
+    };
 });
