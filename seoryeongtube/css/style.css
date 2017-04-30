@@ -48,6 +48,8 @@ a, table thead th, table tbody tr {
 #nav_button,
 #nav_prev { display: none; }
 
+.initial-hide{display: none;}
+
 .slideout-menu {
   position: fixed;
   top: 0;
@@ -139,13 +141,17 @@ table tbody td.name { cursor: pointer; }
 	#logo { float: none; }
 	#logo h1 { text-align: center; }
     
+    
 	#nav { display: none; }
-	#nav_button,
+	
+    /*
+    #nav_button,
 	#nav_prev { position: fixed; display: block; bottom: 1.8%; cursor: pointer; z-index: 10;}
 	#nav_button { right: 15px;}
     #nav_button img { width: 50px; height: 50px; }
 	#nav_prev { left: 15px;}
     #nav_prev img { width: 50px; height: 50px; }
+    */
     
     /*
 	html.open > body { overflow: hidden; }
@@ -155,10 +161,13 @@ table tbody td.name { cursor: pointer; }
 	#nav ul li a { color: #fff; padding: 20px 15px 16px; display: block; font-size: 15px; }
 	#nav_back { position: fixed; display: none; top: 0; left: 0; width: 50%; height: 100%; cursor: pointer; background-color: #000; opacity: 0.5; z-index: 1000; }
     */
+    
     #nav2 {background-color: #990000;}
     #nav2 ul{margin-top: 10px; list-style: none; padding-left: 5px; padding-right: 5px;}
-    #nav2 ul li {float:none; margin: 5px 5px 5px 5px; border: 1px solid white; border-radius: 4px; padding-left: 5px; height: 40px;}
+    #nav2 ul li {float:none; margin: 8px 5px 8px 5px; border: 1px solid white; border-radius: 4px; padding-left: 5px; height: 40px;}
     #nav2 ul li a { margin-left: 8px; color: #fff; display: block; font-size: 15px; line-height: 40px;}
+    
+
     
     .slideout-panel {
       position: relative;

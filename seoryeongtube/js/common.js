@@ -300,6 +300,7 @@ $(document).ready(function(){
 	if (folder_date == "0") {
 		$("#fileListTable .folder .date").contents().remove();
 	};
+    $('body').removeClass('initial-hide');
     /*
 	$( "#nav_button" ).click(function() {
 		$("#nav, #nav_back").toggle();
@@ -314,12 +315,4 @@ $(document).ready(function(){
 		$("#pluginWrap #plugin").toggle();
 	});
     */
-    $("#nav_button").on('click', function() {
-    slideout.toggle();
-    });
-    if (slideout.isOpen() == true){
-        $("#wrap").click(function(){
-           slideout.close();
-        });
-    };
 });
