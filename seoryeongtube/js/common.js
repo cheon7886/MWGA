@@ -301,6 +301,9 @@ $(document).ready(function(){
 		$("#fileListTable .folder .date").contents().remove();
 	};
     $('body').removeClass('initial-hide');
+	$('.btn').click(function() { return false; });
+
+출처: http://bryan7.tistory.com/206 [민서네집]
     /*
 	$( "#nav_button" ).click(function() {
 		$("#nav, #nav_back").toggle();

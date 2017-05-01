@@ -135,7 +135,9 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="date font-size11">$date</td>
                         <td class="mobile font-size11">$date</td>
                         <td class="direct"></td>
-						<td class="address"><div class="btn" data-clipboard-action="copy" data-clipboard-text="$link"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></div></td>
+						<td class="address"><a class="btn" href="$link"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></a></td>
+						<!--
+						<td class="address"><div class="btn" data-clipboard-action="copy" data-clipboard-text="$link"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></div></td>-->
 					</tr>
 					#else
 					<tr>
@@ -145,7 +147,9 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="date font-size11">$date</td>
 						<td class="mobile font-size11">$size<br>$date</td>
                         <td class="direct"></td>
-                        <td class="address"><div class="btn" data-clipboard-action="copy" data-clipboard-text="$link"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></div></td>
+						<td class="address"><a class="btn" href="$link"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></a></td>
+						<!--
+                        <td class="address"><div class="btn" data-clipboard-action="copy" data-clipboard-text="$link"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></div></td>-->
 					</tr>
 					#end <!-- is_folder close -->
 				#end <!-- foreach($files) close -->
@@ -265,7 +269,7 @@ SlideOut.js
       var slideout = new Slideout({
         'panel': document.getElementById('wrap'),
         'menu': document.getElementById('nav2'),
-        'padding': 256,
+        'padding': 200,
         'tolerance': 70,
         'side': 'right'
       });
@@ -319,7 +323,13 @@ function mobileloadConvertor() {
 }
 
 mobileloadConvertor();
-var clipboard = new Clipboard('.btn');
+	
+new Clipboard('.btn', {
+    text: function (trigger) {
+        return window.location.href + trigger.getAttribute('href');
+    }
+});
+	
 </script> 
         
 
