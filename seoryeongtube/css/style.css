@@ -143,7 +143,7 @@ table tbody td.name { cursor: pointer; }
     
     
 	#nav { display: none; }
-	
+	#pluginWrap {display: none;}
     /*
     #nav_button,
 	#nav_prev { position: fixed; display: block; bottom: 1.8%; cursor: pointer; z-index: 10;}
@@ -165,9 +165,11 @@ table tbody td.name { cursor: pointer; }
     #nav2 {background-color: #22313F;}
     #nav2 ul{margin-top: 10px; list-style: none; padding-left: 5px; padding-right: 5px;}
     #nav2 ul li {float:none; margin: 8px 5px 8px 5px; border-bottom: 1px solid #336E7B; padding-left: 5px; height: 40px;}
-    #nav2 ul li a { margin-left: 8px; color: #81CFE0; display: block; font-size: 15px; line-height: 40px;}
-    
-
+    #nav2 ul li a { margin-left: 8px; color: #E4F1FE; display: block; font-size: 15px; line-height: 40px;}
+	#nav2 ul li h1 { margin-left: 12px; color: white; display: block; font-size: 15px; line-height: 40px; }
+    #nav2 ul li#addons {background-color: white; border-bottom: none; margin-top: 40px;}
+    #nav2 ul li#addons div {margin-left: 4px; background-color: #F62459;}
+    #nav2 ul li#login {border-bottom: none;}
     
     .slideout-panel {
       position: relative;

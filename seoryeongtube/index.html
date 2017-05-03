@@ -11,7 +11,7 @@
 
 <script type="text/javascript" src="/$skin/js/jquery-1.11.2.min.js?action=SkinFile"></script>
 <script type="text/javascript">
-var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
+var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 </script>
 <script type="text/javascript" src="/$skin/js/common.js?action=SkinFile"></script>
 <script type="text/javascript" src="/$skin/js/sortabletable.js?action=SkinFile"></script>
@@ -23,15 +23,22 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 <div id="nav2" class="initial-hide">
     <ul>
         #if( $current_login_id )
-        <li class="first"><a href=".?action=Logout" title="$current_login_id">로그아웃</a></li>
+        <li id="login"><a href=".?action=Logout" title="$current_login_id">로그아웃</a></li>
         #else
-        <li class="first"><a href=".?action=Login">로그인</a></li>
+        <li id="login"><a href=".?action=Login">로그인</a></li>
         #end <!-- current_login_id close -->
         #if( $upload_path )
+        <li id="addons"><div><h1>설정</h1></div></li>
         <li onClick="onMkdir()"><a href="#mkdir">새 폴더</a></li>
-        <li onClick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=400,height=200,toolbar=no,status=no,resizable=no');"><a href="#upload">Upload</a></li>
+        <li onClick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=400,height=200,toolbar=no,status=no,resizable=no');"><a href="#upload">업로드</a></li>
         <li onclick="OnPlugin('Delete');"><a href="#">삭제</a></li>
         <li onclick="OnPlugin('Rename');"><a href="#">이름 바꾸기</a></li>
+        
+        <li id="addons"><div><h1>부가기능</h1></div></li>
+        <li onclick="OnPlugin('playlist.asx');"><a href="#">ASX Streaming</a></li>
+	    <li onclick="OnPlugin('ZIPdownload');"><a href="#">ZIP Download</a></li>
+        <li onclick="OnPlugin('RARdownload');"><a href="#">RAR Download</a></li>
+        <li onclick="OnPlugin('album');" class="last"><a href="#">만화뷰어로 보기</a></li>
         
         #end <!-- upload_path close -->
     </ul>
@@ -51,7 +58,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 					#end <!-- current_login_id close -->
 					#if( $upload_path )
 					<li onClick="onMkdir()"><a href="#mkdir">새 폴더</a></li>
-					<li onClick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=400,height=200,toolbar=no,status=no,resizable=no');"><a href="#upload">Upload</a></li>
+					<li onClick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=400,height=200,toolbar=no,status=no,resizable=no');"><a href="#upload">업로드</a></li>
 					<li onclick="OnPlugin('Delete');"><a href="#">삭제</a></li>
 					<li onclick="OnPlugin('Rename');"><a href="#">이름 바꾸기</a></li>
 					#end <!-- upload_path close -->
@@ -146,7 +153,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="date font-size11">$date</td>
 						<td class="mobile font-size11">$size<br>$date</td>
                         <td class="direct"></td>
-                        <td class="address"><div class="btn" data-clipboard-action="copy" data-target="$link"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></div></td>
+                        <td class="address"><div class="btn" data-clipboard-action="copy" data-target="$link"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="file url" /></div></td>
 					</tr>
 					#end <!-- is_folder close -->
 				#end <!-- foreach($files) close -->
