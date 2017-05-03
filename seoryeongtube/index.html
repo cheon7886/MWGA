@@ -23,18 +23,18 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 <div id="nav2" class="initial-hide">
     <ul>
         #if( $current_login_id )
-        <li id="login"><a href=".?action=Logout" title="$current_login_id">로그아웃</a></li>
+        <li id="logout"><a href=".?action=Logout" title="$current_login_id">로그아웃</a></li>
         #else
         <li id="login"><a href=".?action=Login">로그인</a></li>
         #end <!-- current_login_id close -->
         #if( $upload_path )
-        <li id="addons"><div><h1>설정</h1></div></li>
+        <li id="addons"><h1>설정</h1></li>
         <li onClick="onMkdir()"><a href="#mkdir">새 폴더</a></li>
         <li onClick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=400,height=200,toolbar=no,status=no,resizable=no');"><a href="#upload">업로드</a></li>
         <li onclick="OnPlugin('Delete');"><a href="#">삭제</a></li>
         <li onclick="OnPlugin('Rename');"><a href="#">이름 바꾸기</a></li>
         
-        <li id="addons"><div><h1>부가기능</h1></div></li>
+        <li id="addons"><h1>부가기능</h1></li>
         <li onclick="OnPlugin('playlist.asx');"><a href="#">ASX Streaming</a></li>
 	    <li onclick="OnPlugin('ZIPdownload');"><a href="#">ZIP Download</a></li>
         <li onclick="OnPlugin('RARdownload');"><a href="#">RAR Download</a></li>
@@ -66,14 +66,15 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 			</div>
             
             
-            
+            <!--
 			<div id="nav_back"></div>
 			<div id="nav_button"><img src="/$skin/images/btn_nav.png?action=SkinFile" alt="nav" /></div>
-            
+			
 			#if( $display_upper )
 				    <div id="nav_prev" onclick="location.href='..'"><img src="/$skin/images/btn_prev.png?action=SkinFile"  alt="nav" /></div>
 			#else
-			#end	
+			#end
+			-->
 			<div class="clear"></div>
 		</div>
 	</div>
@@ -82,8 +83,8 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 		<div id="inner-wrap" class="width">
 			#if( $content )
 			<div class="error">
-			$content<br/>
-			이 상태가 계속되면 관리자에게 문의하세요.
+				$content<br/>
+				오류가 지속되면 관리자에게 문의하세요.
 				#if( $content_hide_back_button )
 				#else
 				<br/><br/>
@@ -91,7 +92,15 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 				#end
 			</div>
 			#end
-
+				
+			#if( $address )
+			<div id="location">
+				<script type="text/javascript">
+					write_split_address("$address");
+				</script>
+			</div>
+			#end <!-- address close -->
+			
 			#if( $show_files )
 			<div id="pluginWrap">
 				<!---
@@ -104,8 +113,8 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 					<li onclick="OnPlugin('RARdownload');"><a href="#">RAR Download</a></li>
 					<li onclick="OnPlugin('album');" class="last"><a href="#">만화뷰어로 보기</a></li>
 				</ul> --->
-                <button data-dropdown="#dropdown-standard">부가기능</button>
-                <div class="dropdown-menu dropdown-anchor-top-left dropdown-has-anchor" id="dropdown-standard">
+                <button data-dropdown="#dropdown-standard"><b>부가기능</b></button>
+                <div class="dropdown-menu dropdown-anchor-top-right dropdown-has-anchor" id="dropdown-standard">
                 <ul id="plugin">
 					<li onclick="OnPlugin('playlist.asx');"><a href="#">ASX Streaming</a></li>
 					<li onclick="OnPlugin('ZIPdownload');"><a href="#">ZIP Download</a></li>
@@ -168,13 +177,7 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 			</form>
 			#end <!-- show_files close -->
 
-			#if( $address )
-			<div id="location">
-				<script type="text/javascript">
-					write_split_address("$address");
-				</script>
-			</div>
-			#end <!-- address close -->
+			
         </div>
         <div id="web"><script type="text/javascript" src="http://tab2.clickmon.co.kr/pop/wp_ad_160_js.php?PopAd=CM_M_1003067%7C%5E%7CCM_A_1014884%7C%5E%7CAdver_M_1003115" ></script></div>
         </div>
@@ -210,15 +213,15 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
         
         <div id="inner-wrap" class="width">
 			<span><b>SeoryeongTube Since 2015</b></span>
+			<!--
 			<span>Designed by <a href="http://wallel.com" target="_blank"><b>wallel</b></a> (v2.2)</span>
-			<!-- Designed by wallel 이랑 버전 표기는 절대 지우지 마세요. -->
+			Designed by wallel 이랑 버전 표기는 절대 지우지 마세요. -->
 		</div>
      </div>   
 
 
     <div id="creidts">    
-    <div id="credits">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>    
-    <div id="credits">Icons made by <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha">Pixel Buddha</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    <div id="credits">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
     </div>
 </div>
     

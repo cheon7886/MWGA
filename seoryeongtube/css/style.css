@@ -34,19 +34,17 @@ a, table thead th, table tbody tr {
 /* text-shadow: 1px 1px #222; */
 
 
-#logo  { float: left; font-weight: bold; color: #fff; }
+#logo  { float: left; margin-left: 12px; font-weight: bold; color: #fff; }
 #logo h1 { margin: 0; padding: 0; font-size: 22px; }
 #logo h1 a { color: inherit; }
 #logo h1 a:hover { color: #ccc; }
 
-#nav { float: right; font-size: 13px; }
+#nav { float: right; font-size: 13px; margin-right: 10px;}
 #nav a { color: #fff; }
 #nav a:hover { color: #ccc; }
 #nav ul { padding: 0; margin: 0; }
 #nav ul li  { float: left; list-style: none; margin-left: 15px; }
 #nav ul li.first { margin-left: 0; }
-#nav_button,
-#nav_prev { display: none; }
 
 .initial-hide{display: none;}
 
@@ -81,12 +79,13 @@ a, table thead th, table tbody tr {
 
 #article .error { padding: 50px 0; text-align: center; line-height: 200%; }
 
-#article #inner-wrap { margin-top: 20px; border-top: 2px solid #555; padding: 20px 10px; border-bottom: 1px solid #ddd; background: #fff; position: relative; }
+#article #inner-wrap { margin-top: 20px; border-top: 3px solid #D91E18; padding: 0 10px; border-bottom: 1px solid #ddd; background: #fff; position: relative; }
 /* #footer #adsense { margin-top: 20px; border-top: 2px solid #555; padding: 20px 10px; border-bottom: 1px solid #ddd; background: #fff; position: relative; } */
 
-#pluginWrap { position: absolute; z-index: 12; top: -2px; left: 0;}
+#pluginWrap { position: absolute; z-index: 12; top: -2px; right: 0;  box-shadow: 0 0 5px #D91E18;}
 
-#pluginWrap button { margin: 0; padding: 0; float: left; background-color: #c0392b; border: none; color: white; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; width: 120px; height: 30px;}
+#pluginWrap button { margin: 0; padding: 0; float: left; background-color: #D91E18; border: none; color: white; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; width: 120px; height: 40px;}
+#pluginWrap button:hover {background-color: #F22613;}
 
 
 /*
@@ -98,11 +97,12 @@ a, table thead th, table tbody tr {
 #pluginWrap ul#plugin { background: #e74c3c; }
 */
 
-#location { padding: 18px 5px 0 0; line-height: 160%; }
-#location a { margin: 0 3px; background: #ddd; color: #333; text-shadow: 1px 1px #fff; padding: 3px 5px; border-radius: 5px; display: inline-block; }
-#location a:hover { background-color: #eee; }
+#location { padding: 12px 5px 0 0; line-height: 160%; margin-bottom: 12px;}
+#location b {background: #D91E18; border-radius: 3px; display: inline-block; color: white; padding: 0.5em 0.5em 0.5em 0.5em;}
+#location a { margin: 0 3px; background: #4183D7; color: white; padding: 3px 5px; border-radius: 5px; display: inline-block; }
+#location a:hover { background-color: #446CB3; }
 
-table { width: 100%; margin-top: 30px; border-top: 1px solid #999; }
+table { width: 100%; margin-top: 6px; border-top: 1px solid #999; }
 table .checkbox { width: 30px; text-align: center; }
 table .name { text-align: left; word-break: break-all; line-height: 180%; }
 table .size { width: 100px; text-align: center; }
@@ -123,7 +123,7 @@ table tbody td.name { cursor: pointer; }
 
 #article > #web {width: auto; position: absolute; top: 139px; right: 35px;}
 
-#footer { width: 100%; text-align: center; font-size: 11px; padding: 20px 10px 50px; }
+#footer { width: 100%; text-align: center; font-size: 11px; padding: 0 10px 50px; }
 #footer span { display: block; line-height: 200%; }
 
 #credits {display: none;}
@@ -140,7 +140,6 @@ table tbody td.name { cursor: pointer; }
 @media all and (max-width: 959px) {
 	#logo { float: none; }
 	#logo h1 { text-align: center; }
-    
     
 	#nav { display: none; }
 	#pluginWrap {display: none;}
@@ -164,12 +163,14 @@ table tbody td.name { cursor: pointer; }
     
     #nav2 {background-color: #22313F;}
     #nav2 ul{margin-top: 10px; list-style: none; padding-left: 5px; padding-right: 5px;}
-    #nav2 ul li {float:none; margin: 8px 5px 8px 5px; border-bottom: 1px solid #336E7B; padding-left: 5px; height: 40px;}
+    #nav2 ul li {float:none; margin: 8px 5px 8px 5px; border-bottom: 1px solid #336E7B; padding-left: 5px; height: 40px; width: 163px;}
     #nav2 ul li a { margin-left: 8px; color: #E4F1FE; display: block; font-size: 15px; line-height: 40px;}
 	#nav2 ul li h1 { margin-left: 12px; color: white; display: block; font-size: 15px; line-height: 40px; }
-    #nav2 ul li#addons {background-color: white; border-bottom: none; margin-top: 40px;}
-    #nav2 ul li#addons div {margin-left: 4px; background-color: #F62459;}
-    #nav2 ul li#login {border-bottom: none;}
+    #nav2 ul li#addons {background-color: #F62459; border-bottom: none; margin-top: 40px; border-radius: 5px;}
+    #nav2 ul li#login {border: 1px solid #E4F1FE; border-radius: 5px;}
+	#nav2 ul li#login a{float:left;}
+	#nav2 ul li#logout {border: 1px solid #E4F1FE; border-radius: 5px;}
+	#nav2 ul li#logout a{float: right; margin-right:13px;}
     
     .slideout-panel {
       position: relative;
