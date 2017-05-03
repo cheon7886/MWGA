@@ -32,6 +32,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
         <li onClick="window.open('/$skin/upload_frame.html?action=SkinFile#$upload_path*$skin','_blank','width=400,height=200,toolbar=no,status=no,resizable=no');"><a href="#upload">Upload</a></li>
         <li onclick="OnPlugin('Delete');"><a href="#">삭제</a></li>
         <li onclick="OnPlugin('Rename');"><a href="#">이름 바꾸기</a></li>
+        
         #end <!-- upload_path close -->
     </ul>
 </div>
@@ -135,9 +136,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="date font-size11">$date</td>
                         <td class="mobile font-size11">$date</td>
                         <td class="direct"></td>
-						<td class="address"><a class="btn" href="$link"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></a></td>
-						<!--
-						<td class="address"><div class="btn" data-clipboard-action="copy" data-clipboard-text="$link"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></div></td>-->
+						<td class="address"><div class="btn" data-clipboard-action="copy" data-target="$link"><img src="/$skin/images/folder_link.png?action=SkinFile" alt="folder url" /></div></td>
 					</tr>
 					#else
 					<tr>
@@ -147,9 +146,7 @@ var folder_date = "0" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 						<td class="date font-size11">$date</td>
 						<td class="mobile font-size11">$size<br>$date</td>
                         <td class="direct"></td>
-						<td class="address"><a class="btn" href="$link"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></a></td>
-						<!--
-                        <td class="address"><div class="btn" data-clipboard-action="copy" data-clipboard-text="$link"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></div></td>-->
+                        <td class="address"><div class="btn" data-clipboard-action="copy" data-target="$link"><img src="/$skin/images/page_white_link.png?action=SkinFile" alt="file url" /></div></td>
 					</tr>
 					#end <!-- is_folder close -->
 				#end <!-- foreach($files) close -->
@@ -323,13 +320,11 @@ function mobileloadConvertor() {
 }
 
 mobileloadConvertor();
-	
-new Clipboard('.btn', {
+var clipboard = new Clipboard('.btn',{
     text: function (trigger) {
-        return window.location.href + trigger.getAttribute('href');
+        return window.location.href + trigger.getAttribute('data-target');
     }
 });
-	
 </script> 
         
 
