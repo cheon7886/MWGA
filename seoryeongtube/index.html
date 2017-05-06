@@ -23,7 +23,7 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 <div id="nav2" class="initial-hide">
     <ul>
         #if( $current_login_id )
-        <li id="logout"><a href=".?action=Logout" title="$current_login_id">로그아웃</a></li>
+        <li id="logout"><a href=".?action=Logout" title="$current_login_id">$current_login_id : 로그아웃</a></li>
         #else
         <li id="login"><a href=".?action=Login">로그인</a></li>
         #end <!-- current_login_id close -->
@@ -223,16 +223,18 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
     <div id="creidts">    
     <div id="credits">Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
     </div>
+    
+    #if( $upload_path )
+    <div style="visibility:hidden">
+    <form method="GET" action="." name="MkdirForm">
+        <input type="hidden" name="action" value="MakeDirectory">
+        <input type="hidden" name="name">
+    </form>
+    </div>
+    #end
 </div>
     
-#if( $upload_path )
-<div style="visibility:hidden">
-<form method="GET" action="." name="MkdirForm">
-	<input type="hidden" name="action" value="MakeDirectory">
-	<input type="hidden" name="name">
-</form>
-</div>
-#end
+
     
 <script type="text/javascript">
 var st1 = new SortableTable(document.getElementById("fileListTable"),

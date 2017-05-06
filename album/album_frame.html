@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+	<head>
+		<title>Berryz Webshare Photoviewer!</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0">
+        <meta name="theme-color" content="#990000">
+		<link rel="Stylesheet" type="text/css" href="/?action=PluginResource&type=album&file=style.css" />
+		<script type="text/javascript" src="/?action=PluginResource&type=album&file=jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="/?action=PluginResource&type=album&file=jquery.adv.js"></script>
+        <script type="text/javascript" src="/?action=PluginResource&type=album&file=jquery.nice-select.min.js"></script>
+        <link rel="stylesheet" href="/?action=PluginResource&type=album&file=nice-select.css">
+		<script type="text/javascript">
+        $(document).ready(function() {
+            $('select').niceSelect();
+        });
+		var linkArray = new Array;
+		var nameArray = new Array;
+		var imageCount = 0;
+		var currentImage = 0;
+		var zoomRatio = 'width100per';
+		var hashpage = 0;
+		
+		hashpage = Number(window.location.hash.substr(1));
+		var linkArray = new Array(#foreach($files) '$link',#end'');
+		var nameArray = new Array(#foreach($files) '$name',#end'');
+		</script>
+		<script type="text/javascript" src="/?action=PluginResource&type=album&file=common.js"></script>
+	</head>
+	<body onLoad='Redraw();'>
+		<div id="fileList">&nbsp;</div>
+        
+		<div id="wrap">
+			<div id="header">
+				<p id='filenamePane' class='filenamePane'></p>
+				<a href='#' class="header_togglelistview"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
+				<a href='.' class="header_backfilelist"><img src="/?action=PluginResource&type=album&file=home.gif" /></a>
+					<select name="zoom" onChange="onZoomChange(this)" id="zoom">
+						<option value="" data-display="Select">Zoom Option</option>
+						<option value="real">original</option>
+						<option value="width960">960px</option>
+						<option value="width100per" selected="selected">Fit to screen</option>
+						<option value="height">세로사이즈 기준</option>
+					</select>
+				
+				</div>
+
+			<div id="article">
+                <div id="ScrollList"></div>
+                
+				<div id="button_left_on" style='display:none'><a href="#" id="control_prev" class="control_page" onClick="onClickPrev();"></a></div>
+				<div id='button_right_on'><a href="#" id="control_next" class="control_page" onClick="onClickNext();"></a></div>
+				<div id='imagePane'></div>
+				<!--<div id="fullscreen"><a href="#" class="fullscreen_toggle"><img src="/?action=PluginResource&type=album&file=fullscreen.png" /></a></div> -->
+			</div>
+			<div id="footer">
+				<button id="scr_btn" onClick="ScrollClick();">
+					<img id="comic_img" src="/?action=PluginResource&type=album&file=fullscreen.png" />
+					<img id="scroll_img" src="/?action=PluginResource&type=album&file=fullscreen2.png" />
+				</button>
+			</div>
+			<div id="credit" style="display:none;">
+				<div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			RedrawList();
+		</script>
+	</body>
+</html>

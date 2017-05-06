@@ -1,0 +1,54 @@
+@charset "utf-8";
+@import url( "http://fonts.googleapis.com/earlyaccess/notosanskr.css" );
+
+img{border:0; font-family: "Noto Sans KR", sans-serif;}
+
+html,body{margin:0;padding:0; font-family: "Noto Sans KR", sans-serif;}
+body{overflow-y:scroll}
+#fileList{display:none}
+#header{position: fixed; top:0px; width: 100%;height:40px;background:#CF000F; opacity: 1; z-index: 900; box-shadow: 0 0 5px #CF000F;}
+#header a.header_togglelistview, #header a.header_backfilelist {display:block;padding:5px;position:absolute}
+#header a.header_backfilelist{right:0}
+#header p{margin:0 40px;padding:0;text-align:center;color:#fff;font-size:1.2em; padding-top: 2px;}
+#header select{
+    position:absolute;
+    left: 45px;
+    top: 5px;
+}
+#header a.header_togglelistview, #header a.header_backfilelist {top:0}
+
+#footer {position: fixed; bottom: 5px; right: 5px; width: 60px; height: 60px; background: transparent; z-index: 900;}
+#footer #scr_btn{background-color: #CF000F; color: white; text-align: center; width: 100%; height: 100%; text-decoration: none; display: block; opacity: 1; border-radius: 8px; border: none; padding: 0; box-shadow: 0 0 5px #CF000F;}
+#footer #scr_btn img{width: 40px; height: 40px; position: absolute; top: 10px; left: 10px;}
+#footer #scr_btn img#comic_img{display: none;}
+#footer #scr_btn img#scroll_img{display: block;}
+
+
+/*render menu bar by css*/
+span.icon-bar{display:block;width:30px;height:4px;background-color:#fff;}
+span.icon-bar + .icon-bar{margin-top:6px}
+
+#button_left_on a{width:10%;display:block;position:absolute;}
+#button_right_on a{width:10%;display:block;position:absolute;right:0}
+
+#ScrollList {display: none;}
+
+#fileList{width:220px;float:left;overflow-y:scroll;position:fixed;
+background: #990000;}
+#fileList ul{list-style:none;margin:0;padding:0}
+#fileList ul li{margin:0;padding:0;width:100%}
+#fileList ul li a{word-break:break-all;color:#fff;padding:6px 0;margin-left:10px;display:block;text-decoration:none;}
+#fileList ul li.active a{font-weight:bold}
+
+#imagePane{text-align:center;}
+/*#imagePane a img{image-rendering: -webkit-optimize-contrast; image-rendering: optimize-contrast;}*/
+/*
+#fullscreen{z-index:99;position:fixed;bottom:0;right:0}
+.fullscreen_toggle{padding:15px 5px;border-top-left-radius:5px;background-color:transparent;}
+*/
+/* Zoom Ratio(비율) Configuration */
+#imagePane .width960{width:960px;}
+#imagePane .width100per{width:100%;}
+#imagePane .height{height: 100vh;}
+#ScrollList { width: 97vw; margin: 0 auto;}
+#ScrollList img {display: block; width: 97vw; margin-top: 5px; margin-bottom: 5px; box-shadow: 0 0 5px #888888;}
