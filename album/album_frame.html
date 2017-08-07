@@ -1,24 +1,19 @@
 <!doctype html>
 <html lang="ko">
 	<head>
-		<title>Berryz Webshare Photoviewer!</title>
+		<title>베리즈 웹쉐어 포토뷰어</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0">
-        <meta name="theme-color" content="#990000">
 		<link rel="Stylesheet" type="text/css" href="/?action=PluginResource&type=album&file=style.css" />
 		<script type="text/javascript" src="/?action=PluginResource&type=album&file=jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="/?action=PluginResource&type=album&file=jquery.adv.js"></script>
-        <script type="text/javascript" src="/?action=PluginResource&type=album&file=jquery.nice-select.min.js"></script>
-        <link rel="stylesheet" href="/?action=PluginResource&type=album&file=nice-select.css">
+		
 		<script type="text/javascript">
-        $(document).ready(function() {
-            $('select').niceSelect();
-        });
 		var linkArray = new Array;
 		var nameArray = new Array;
 		var imageCount = 0;
 		var currentImage = 0;
-		var zoomRatio = 'width100per';
+		var zoomRatio = 'fitwide';
 		var hashpage = 0;
 		
 		hashpage = Number(window.location.hash.substr(1));
@@ -33,17 +28,15 @@
 		<div id="wrap">
 			<div id="header">
 				<p id='filenamePane' class='filenamePane'></p>
-				<a href='#' class="header_togglelistview"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
-				<a href='.' class="header_backfilelist"><img src="/?action=PluginResource&type=album&file=home.gif" /></a>
-					<select name="zoom" onChange="onZoomChange(this)" id="zoom">
-						<option value="" data-display="Select">Zoom Option</option>
-						<option value="real">original</option>
-						<option value="width960">960px</option>
-						<option value="width100per" selected="selected">Fit to screen</option>
-						<option value="height">세로사이즈 기준</option>
-					</select>
-				
-				</div>
+				<a href='#' class="header_togglelistview"><img src="/?action=PluginResource&type=album&file=list.png"/></a>
+				<a href='.' class="header_backfilelist"><img src="/?action=PluginResource&type=album&file=home.png" /></a>
+			</div>
+			
+			<div id="selector">
+				<button id="fitwide" onClick="resizing(this);"><img src="/?action=PluginResource&type=album&file=wide.png"/></button>
+				<button id="fitvert" onClick="resizing(this);"><img src="/?action=PluginResource&type=album&file=vert.png"/></button>
+				<button id="real" onClick="resizing(this);"><img src="/?action=PluginResource&type=album&file=100.png"/></button>
+			</div>
 
 			<div id="article">
                 <div id="ScrollList"></div>

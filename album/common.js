@@ -87,7 +87,6 @@ function ScrollClick(){
 		document.getElementById("button_right_on").style.display = "none";
 		document.getElementById("imagePane").style.display = "none";
 		document.getElementById("ScrollList").style.display = "block";
-		document.getElementsByClassName("nice-select")[0].style.display = "none";
 		document.getElementById("comic_img").style.display = "block";
 		document.getElementById("scroll_img").style.display = "none";
 		clicknum = 1;
@@ -97,13 +96,21 @@ function ScrollClick(){
 		document.getElementById("button_right_on").style.display = "block";
 		document.getElementById("imagePane").style.display = "block";
 		document.getElementById("ScrollList").style.display = "none";
-		document.getElementsByClassName("nice-select")[0].style.display = "block";
 		document.getElementById("comic_img").style.display = "none";
 		document.getElementById("scroll_img").style.display = "block";
+		Redraw();
 		clicknum = 0;
 	}
 }
 
+function resizing(but){
+	var size = but.id;
+	zoomRatio = size;
+	Redraw();
+	
+}
+
+/*
 function onZoomChange(sel){
 	var ratio = sel.options[sel.selectedIndex].value;
 	if(ratio != '') {
@@ -111,6 +118,7 @@ function onZoomChange(sel){
 		Redraw();
 	}
 }
+*/
 
 var listIsShown = false;
 

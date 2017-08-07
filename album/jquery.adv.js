@@ -19,11 +19,15 @@ jQuery(function($){
 	});
 	
 	$("a.header_togglelistview").click(function(){
+		
 		$("#fileList").animate({width: 'toggle'}, 200, 'swing');
-		if(list_toggle == 1){ $("#wrap").css('margin', '0'); list_toggle = 0; }
+		if(list_toggle == 1){ $("#wrap").css('margin', '0'); list_toggle = 0; 
+		$("#selector").hide();
+		}
 		else {
 			$("#wrap").css("margin", "0 0 0 220px");
 			list_toggle = 1;
+			$("#selector").show();
 		}
 	});
 });

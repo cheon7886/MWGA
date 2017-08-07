@@ -122,6 +122,7 @@ table tbody td.name { cursor: pointer; }
 @media all and (min-width: 1024px) {
     #disqus_thread { width: 1000px; margin: 0 auto; }
     #footer > #adsense {width: 1000px; display: table; margin-left: auto; margin-right: auto; position: relative;}
+	#nav2 {display: none;}
 }
 
 @media all and (max-width: 800px) {
@@ -434,7 +435,11 @@ table tbody td.name { cursor: pointer; }
   }
 
   .slideout-menu {
-    display: block;
+    display: none;
   }
+	#nav2 {display: none;
+	}
 
 }
+
+#wrap {background-color: transparent;}
