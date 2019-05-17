@@ -20,7 +20,9 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 </head>
 
 <body>
+
 <div id="nav2" class="initial-hide">
+
     <ul>
         #if( $current_login_id )
         <li id="logout"><a href=".?action=Logout" title="$current_login_id">$current_login_id : 로그아웃</a></li>
@@ -39,7 +41,7 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 	    <li onclick="OnPlugin('ZIPdownload');"><a href="#">ZIP Download</a></li>
         <li onclick="OnPlugin('RARdownload');"><a href="#">RAR Download</a></li>
         <li onclick="OnPlugin('album');" class="last"><a href="#">만화뷰어로 보기</a></li>
-        
+
         #end <!-- upload_path close -->
     </ul>
 </div>
@@ -145,7 +147,7 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 				<tbody>
 				#foreach( $files )
 					#if ( $is_folder )
-					<tr class="folder">
+					<tr class="folder" id="$link">
 						<td class="checkbox"><input type='checkbox' name="checkbox#$link" value="$link" onClick='HighlightRow("$link", this.checked)'/></td>
 						<td class="name meiryo" onclick="location.href='$link'"><a href="$link">$name</a></td>
 						<td class="size font-size11" id="cvtsize[]"></td>
@@ -173,6 +175,7 @@ var folder_date = "1" // 폴더 날짜 // 보이기 : 1, 숨기기 : 0
 					</tr>
 					#end <!-- files close -->
 				</tbody>
+				<script type="text/javascript">	remove_slash();	</script>
 			</table>
 			</form>
 			#end <!-- show_files close -->

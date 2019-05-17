@@ -252,6 +252,17 @@ function uncolorme(obj)
 	obj.style.backgroundColor = "";
 }
 
+
+function remove_slash()
+{
+	var folders = document.getElementsByClassName("folder");
+	for(var i = 0; i < folders.length; i ++)
+	{
+		folders[i].id = folders[i].id.replace("/", "");
+		folders[i].id = folders[i].id.toUpperCase()
+	}
+}
+
 function SUBDIR_generate_point(path, lev, name)
 {
 	cache[path] = false;
@@ -266,19 +277,30 @@ function SUBDIR_generate_point(path, lev, name)
 function write_split_address( addr )
 {
 	var output = ""
+	var temp = ""
+	var rename = ""
 	var path = ".";
 	if (addr != "/")
 	{
 		var arr = addr.split('/');
-		for(var i = arr.length - 2; i > 0 ; i --)
+		output = SUBDIR_generate_point(path ,1,arr[arr.length - 2]);
+		path += "/..";
+		for(var i = arr.length - 3; i > 0 ; i --)
 		{
+			rename = encodeURIComponent(arr[i+1]);
+			rename = rename.toUpperCase();
+			rename = rename.replace(/-/gi, "%2D");
+			temp = "/#" + rename
+			path = path + temp
 			output = SUBDIR_generate_point(path ,1,arr[i]) + output;
+			path = path - temp
 			path += "/..";
 		}
 	}
 	output = "<b>현재위치</b> <a href='/'>처음</a>" + output;
 	document.getElementById('location').innerHTML += output;
 }
+
 
 /*
 //file address copy
