@@ -98,6 +98,7 @@ function ScrollClick(){
 		document.getElementById("ScrollList").style.display = "none";
 		document.getElementById("comic_img").style.display = "none";
 		document.getElementById("scroll_img").style.display = "block";
+		currentImage = 1;
 		Redraw();
 		clicknum = 0;
 	}

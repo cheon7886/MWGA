@@ -37,8 +37,8 @@ body{overflow-y:scroll}
 span.icon-bar{display:block;width:46px;height:6px;background-color:#fff; margin-right: 7px; margin-left: 7px; border-radius: 1px;margin-top:10px}
 span.icon-bar + .icon-bar{margin-top:10px}*/
 
-#button_left_on a{width:10%;display:block;position:absolute;}
-#button_right_on a{width:10%;display:block;position:absolute;right:0}
+#button_left_on a{width:20%;display:block;position:absolute;}
+#button_right_on a{width:20%;display:block;position:absolute;right:0}
 
 #ScrollList {display: none;}
 
